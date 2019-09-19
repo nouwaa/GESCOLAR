@@ -1,14 +1,9 @@
 <?php
-/**
- *
- *  Arquivo para registro os dados de um aluno no banco de dados.
- */
- if(isset($_REQUEST['atualizar']))
+ try
  {
-    try
+    if(isset($_REQUEST['atualizar']))
     {
         include 'includes/conexao.php';
-
         $sql = "UPDATE alunos SET nome = ?, data_nascimento = ?, sexo =?,
                                   genero = ?, cpf = ?, cidade = ?, estado = ?,
                                   bairro = ?, rua = ?, cep = ?
@@ -25,13 +20,29 @@
         $stmt->bindParam(9, $_REQUEST['rua']);
         $stmt->bindParam(10, $_REQUEST['cep']);
         $stmt->bindParam(11, $_REQUEST['id_aluno']);
+        $stmt->execute();                         
+    }
+
+    if(isset($_RQUEST['excluir']))
+    {
+        $stmt - $conexao >prepare("DELETE FROM aluno WHERE id - ?");
+        $stmt->bindParam(1,$_REQUEST['id_aluno']);
         $stmt->execute();
-                            
-    } catch(Exception $e) {
+        header("location: lista_alunos.php");
+    }
+
+    $stmt = $conexao->prepare("SELECT * FROM aluno WHERE id = ?");
+    $stmt->bindParam(1,$_REQUEST['id_aluno']);
+    $stmt->execute();
+    $aluno = $stmt->fechObject();
+    
+    }catch(Exception $e) {
         echo $e->getMessage();
     }
-}
+
 ?> 
+<link href="css/estilos.css" type="text/css" rel="stylesheet" />
+<?php include_once 'includes/cabecalho.php' ?>
 <div>
 <fieldset>
     <legend>Cadastro de aluno </legend>
@@ -47,5 +58,3 @@
         </form>
     </legend>
 </div>
-
-
