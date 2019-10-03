@@ -30,7 +30,7 @@ try
     echo $e -> getMessage();
 }
 ?>
-<link href = "css/estilos.css" type = "text/css" rel = "stylesheer" />
+<link href = "css/estilos.css" type = "text/css" rel = "stylesheet" />
 
 <?php include_once 'includes/cabecalho.php' ?>
 

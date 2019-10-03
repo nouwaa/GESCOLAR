@@ -30,3 +30,12 @@ create table turma (
     primary key (id),
     foreign key (id_curso) references curso (id)
 );
+
+CREATE TABLE matricula (
+    id_turma int,
+    id_aluno int,
+    data_matricula date,
+    PRIMARY KEY(id_turma, id_aluno),
+    FOREIGN KEY (id_turma) REFERENCES turma(id),
+    FOREIGN KEY (id_aluno) REFERENCES aluno(id)
+);
